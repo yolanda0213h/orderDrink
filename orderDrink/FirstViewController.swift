@@ -96,28 +96,29 @@ class FirstViewController: UIViewController, UIPopoverPresentationControllerDele
     @IBAction func nameDidEndOnExit(_ sender: Any) {
     }
     @IBAction func sentButton(_ sender: UIButton) {
-        if nameTextField.text?.isEmpty == false, mediumTextField.textColor == UIColor.black, orderIceButton.titleColor(for: .normal) == UIColor.black, orderSugarButton.titleColor(for: .normal) == UIColor.black, orderIceButton.titleColor(for: .normal) == UIColor.black{
-            keepData()
-            
-            tabBarController?.selectedIndex = 1
-            /*
-            let urlStr = "https://sheetdb.io/api/v1/2bnkitnsc8xzd"
-            fecth(urlStr: urlStr) { (drinkData) in
-                print(drinkData?.count)
-                if let drinkData = drinkData {
-                if drinkData.count >= 1 {
-                    
-                    DispatchQueue.main.async {
-                        
-                        controller?.tableView.reloadData()
-                    }
-                }
-                    
-                }
-            }
-            */
-        }else if nameTextField.text?.isEmpty == true {
+        let mediumID = mediumTextField.text
+        let medium = "https://medium.com/\(mediumID ?? "@")"
+        if nameTextField.text?.isEmpty == true {
             let controller = UIAlertController(title: "請填入名字稱呼", message: nil, preferredStyle: .alert)
+            controller.addAction(UIAlertAction(title: "ok", style: .default, handler: nil))
+            present(controller, animated: true, completion: nil)
+            return
+        }else if mediumTextField.text?.isEmpty == false ,URL(string: medium) != nil {
+            
+                if orderIceButton.titleColor(for: .normal) == UIColor.black, orderSugarButton.titleColor(for: .normal) == UIColor.black, orderIceButton.titleColor(for: .normal) == UIColor.black{
+                keepData()
+                    
+                tabBarController?.selectedIndex = 1
+                
+                }else {
+                    let controller = UIAlertController(title: "請選擇飲料及甜度冰塊", message: nil, preferredStyle: .alert)
+                    controller.addAction(UIAlertAction(title: "ok", style: .default, handler: nil))
+                    present(controller, animated: true, completion: nil)
+                    return
+                }
+            
+        }else {
+            let controller = UIAlertController(title: "請填入mediumID", message: nil, preferredStyle: .alert)
             controller.addAction(UIAlertAction(title: "ok", style: .default, handler: nil))
             present(controller, animated: true, completion: nil)
             return
@@ -142,12 +143,14 @@ class FirstViewController: UIViewController, UIPopoverPresentationControllerDele
         let newData = UploadData(date: dateData, name: nameData, mediumID: mediumData, drink: orderData, price: priceData)
         post(orderData: newData)
         
+        
     }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         segue.destination.preferredContentSize = CGSize(width: 320, height: 240)
         segue.destination.popoverPresentationController?.delegate = self
-        
         
 
     }

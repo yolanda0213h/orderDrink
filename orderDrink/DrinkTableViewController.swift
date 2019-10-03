@@ -12,44 +12,41 @@ class DrinkTableViewController: UITableViewController {
 
     var orders:[List] = []
     var newList:[NewList] = []
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        if let url = URL(string: "https://sheetdb.io/api/v1/2bnkitnsc8xzd"){
-            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-                let decoder = JSONDecoder()
-                if let data = data {
-                    do {
-                        let drinkData = try decoder.decode([DownLoad].self, from: data)
-                        //print(drinkData.count)
-                        
-                        if drinkData.count >= 1 {
-                        
-                        for i in 0...drinkData.count - 1 {
-                            let date = drinkData[i].date
-                            let name = drinkData[i].name
-                            let medium = drinkData[i].mediumID
-                            let drinks = drinkData[i].drink.components(separatedBy: ".")
-                            let price = drinkData[i].price
-                            let oneOrder = List(date: date, name: name, mediumID: medium, drink: drinks[0],sugar:drinks[1],ice: drinks[2], price:Int(price)!)
-                            let list = NewList(drinkName: drinkData[i].drink, cupCount: 1)
-                            self.orders.append(oneOrder)
-                            self.newList.append(list)
-                            //print(self.newList.count)
-                            DispatchQueue.main.async {
-                                self.tableView.reloadData()
-                            }
-                            }
-                        }
-                    }
-                    catch{
-                        print(error)
+    func download(url:String){
+        orders = []
+        newList = []
+        let urlStr = url
+        fecth(urlStr: urlStr) { (drinkData) in
+            if let drinkData = drinkData, drinkData.count >= 1 {
+                for i in 0...drinkData.count - 1 {
+                    let date = drinkData[i].date
+                    let name = drinkData[i].name
+                    let medium = drinkData[i].mediumID
+                    let drinks = drinkData[i].drink.components(separatedBy: ".")
+                    let price = drinkData[i].price
+                    let oneOrder = List(date: date, name: name, mediumID: medium, drink: drinks[0],sugar:drinks[1],ice: drinks[2], price:Int(price)!)
+                    let list = NewList(drinkName: drinkData[i].drink, cupCount: 1)
+                    self.orders.append(oneOrder)
+                    self.newList.append(list)
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
                     }
                 }
-                print(self.orders.count)
             }
-            task.resume()
         }
+    }
+    @objc func handleRefresh(refreshControl:UIRefreshControl){
+        
+        self.tableView.reloadData()
+        refreshControl.endRefreshing()
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.refreshControl?.addTarget(self, action: #selector(self.handleRefresh(refreshControl:)), for: UIControl.Event.valueChanged)
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        download(url: "https://sheetdb.io/api/v1/2bnkitnsc8xzd")
     }
 
     // MARK: - Table view data source
@@ -102,8 +99,7 @@ class DrinkTableViewController: UITableViewController {
     }
     
         
-        
-    
+
     
     @IBSegueAction func sumSegue(_ coder: NSCoder) -> UITableViewController? {
         let controller = SumTableViewController(coder: coder)
