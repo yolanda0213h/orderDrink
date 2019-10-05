@@ -18,6 +18,7 @@ class FirstViewController: UIViewController, UIPopoverPresentationControllerDele
     let sugarStyle = ["多糖","正常糖","少糖","半糖","微糖","二分糖","一分糖","無糖"]
     let iceStyle = ["多冰","正常冰","少冰","微冰","去冰","完全去冰"]
     var orders:[Order] = []
+    let drinkPickerView = UIPickerView()
     override func viewDidLoad() {
         super.viewDidLoad()
         if let url = URL(string: "https://sheetdb.io/api/v1/7vd0ylfezf9zg"){
@@ -44,10 +45,11 @@ class FirstViewController: UIViewController, UIPopoverPresentationControllerDele
                         print(error)
                     }
                 }
-                print(self.orders.count)
+                //print(self.orders.count)
             }
             task.resume()
         }
+        
     }
     @IBAction func drinkButton(_ sender: UIButton) {
         let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -61,7 +63,8 @@ class FirstViewController: UIViewController, UIPopoverPresentationControllerDele
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
                 controller.addAction(cancelAction)
         present(controller, animated: true, completion: nil)
-            
+        
+        
 
 
     }
@@ -91,10 +94,12 @@ class FirstViewController: UIViewController, UIPopoverPresentationControllerDele
         controller.addAction(cancelAction)
         present(controller, animated: true, completion: nil)
     }
-    @IBAction func mediumDidEndOnExit(_ sender: Any) {
+    @IBAction func mediumDidEndOnExit(_ sender: UITextField) {
+        
     }
-    @IBAction func nameDidEndOnExit(_ sender: Any) {
+    @IBAction func nameDidEndOnExit(_ sender: UITextField) {
     }
+    
     @IBAction func sentButton(_ sender: UIButton) {
         let mediumID = mediumTextField.text
         let medium = "https://medium.com/\(mediumID ?? "@")"
@@ -146,13 +151,22 @@ class FirstViewController: UIViewController, UIPopoverPresentationControllerDele
         
     }
     
+    @IBSegueAction func drinkType(_ coder: NSCoder) -> DrinkTypeTableViewController? {
+        return DrinkTypeTableViewController(coder: coder)
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        segue.destination.preferredContentSize = CGSize(width: 320, height: 240)
+        segue.destination.preferredContentSize = CGSize(width: 400, height: 240)
         segue.destination.popoverPresentationController?.delegate = self
+        if segue.identifier != "0" {
+            let imageName = String(segue.identifier!)
+            if let controller = segue.destination as? SecondViewController {
+                controller.imageName = imageName
+            }
+        }
         
-
     }
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
        return .none

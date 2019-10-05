@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		AA29AD45232F7FE600BC2024 /* SumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29AD44232F7FE600BC2024 /* SumTableViewCell.swift */; };
 		AA29AD47232F8CC800BC2024 /* SumTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29AD46232F8CC800BC2024 /* SumTableViewController.swift */; };
+		AA29AD492347266B00BC2024 /* DrinkTypeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29AD482347266B00BC2024 /* DrinkTypeTableViewController.swift */; };
+		AA29AD4B234726A500BC2024 /* TypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA29AD4A234726A500BC2024 /* TypeTableViewCell.swift */; };
 		AA2E55052314930A00C025EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2E55042314930A00C025EF /* AppDelegate.swift */; };
 		AA2E55072314930A00C025EF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2E55062314930A00C025EF /* SceneDelegate.swift */; };
 		AA2E55092314930A00C025EF /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2E55082314930A00C025EF /* FirstViewController.swift */; };
@@ -25,6 +27,8 @@
 /* Begin PBXFileReference section */
 		AA29AD44232F7FE600BC2024 /* SumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumTableViewCell.swift; sourceTree = "<group>"; };
 		AA29AD46232F8CC800BC2024 /* SumTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumTableViewController.swift; sourceTree = "<group>"; };
+		AA29AD482347266B00BC2024 /* DrinkTypeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkTypeTableViewController.swift; sourceTree = "<group>"; };
+		AA29AD4A234726A500BC2024 /* TypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeTableViewCell.swift; sourceTree = "<group>"; };
 		AA2E55012314930A00C025EF /* orderDrink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = orderDrink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA2E55042314930A00C025EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA2E55062314930A00C025EF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +81,8 @@
 				AA2E553E232628AC00C025EF /* JsonUpload.swift */,
 				AA2E55082314930A00C025EF /* FirstViewController.swift */,
 				AA2E553A2320E56B00C025EF /* DrinkTableViewController.swift */,
+				AA29AD482347266B00BC2024 /* DrinkTypeTableViewController.swift */,
+				AA29AD4A234726A500BC2024 /* TypeTableViewCell.swift */,
 				AA29AD46232F8CC800BC2024 /* SumTableViewController.swift */,
 				AA2E554023266DA100C025EF /* AllpersonTableViewCell.swift */,
 				AA29AD44232F7FE600BC2024 /* SumTableViewCell.swift */,
@@ -162,9 +168,11 @@
 				AA2E550B2314930A00C025EF /* SecondViewController.swift in Sources */,
 				AA2E553D2320FD7600C025EF /* DrinkAPI.swift in Sources */,
 				AA2E554123266DA100C025EF /* AllpersonTableViewCell.swift in Sources */,
+				AA29AD492347266B00BC2024 /* DrinkTypeTableViewController.swift in Sources */,
 				AA29AD45232F7FE600BC2024 /* SumTableViewCell.swift in Sources */,
 				AA2E553F232628AC00C025EF /* JsonUpload.swift in Sources */,
 				AA2E553B2320E56B00C025EF /* DrinkTableViewController.swift in Sources */,
+				AA29AD4B234726A500BC2024 /* TypeTableViewCell.swift in Sources */,
 				AA2E55092314930A00C025EF /* FirstViewController.swift in Sources */,
 				AA2E55052314930A00C025EF /* AppDelegate.swift in Sources */,
 				AA2E55072314930A00C025EF /* SceneDelegate.swift in Sources */,

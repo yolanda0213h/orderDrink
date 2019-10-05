@@ -32,11 +32,12 @@ class DrinkTableViewController: UITableViewController {
                         self.tableView.reloadData()
                     }
                 }
+                self.orders.reverse()
             }
         }
     }
     @objc func handleRefresh(refreshControl:UIRefreshControl){
-        
+        download(url: "https://sheetdb.io/api/v1/2bnkitnsc8xzd")
         self.tableView.reloadData()
         refreshControl.endRefreshing()
     }
@@ -47,6 +48,7 @@ class DrinkTableViewController: UITableViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         download(url: "https://sheetdb.io/api/v1/2bnkitnsc8xzd")
+        self.tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -63,17 +65,22 @@ class DrinkTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         if orders.count - indexPath.row != 0 {
+            let mediumString = "https://medium.com/\(orders[indexPath.row].mediumID)"
+            let orderDrink = orders[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "orderCell", for: indexPath) as! AllpersonTableViewCell
-            
-                cell.nameLabel.text = orders[indexPath.row].name
-                cell.mediumIDLabel.text = orders[indexPath.row].mediumID
-                cell.drinkLabel.text = orders[indexPath.row].drink
-                cell.priceLabel.text = String(orders[indexPath.row].price)
-                cell.sugarLabel.text = orders[indexPath.row].sugar
-                cell.iceLabel.text = orders[indexPath.row].ice
-                cell.timeLabel.text = orders[indexPath.row].date
-            
+            DispatchQueue.main.async {
+                cell.nameLabel.text = orderDrink.name
+                cell.mediumIDLabel.text = orderDrink.mediumID
+                cell.drinkLabel.text = orderDrink.drink
+                cell.priceLabel.text = String(orderDrink.price)
+                cell.sugarLabel.text = orderDrink.sugar
+                cell.iceLabel.text = orderDrink.ice
+                cell.timeLabel.text = orderDrink.date
+                cell.mediumUrlTextView.text = mediumString
+                cell.mediumUrlTextView.textColor = UIColor.white
+            }
             return cell
         }
         else {
@@ -125,6 +132,9 @@ class DrinkTableViewController: UITableViewController {
         var b = 0
         for z in 0...list2.count-1 {
             b += list2[z].cupCount
+        }
+        list2.sort { (a, b) -> Bool in
+            a.drinkName > b.drinkName
         }
         controller?.list2 = list2
         controller?.cupCount = b

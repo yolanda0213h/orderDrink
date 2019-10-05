@@ -14,6 +14,7 @@ class AllpersonTableViewCell: UITableViewCell {
     @IBOutlet weak var drinkNameLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var mediumIDLabel: UILabel!
+    @IBOutlet weak var mediumUrlTextView: UITextView!
     @IBOutlet weak var drinkLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var sugarLabel: UILabel!

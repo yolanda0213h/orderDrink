@@ -14,13 +14,19 @@ struct Drink: Codable {
     var size: String?
     var price: String?
     var drinkID: String?
+    var detail: String?
 }
 
 struct Order: Codable {
     var orderDrink: String
     var orderPrice: Int
 }
-//
+struct Menu: Codable {
+    var drinkName: String
+    var detail: String
+    var drinkID: String
+}
+//下載訂購資料
 struct List: Codable {
     var date:String
     var name:String
